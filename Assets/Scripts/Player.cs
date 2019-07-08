@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     private Vector3 _initPos;
     private Vector3 _initRot;
-    
+
     public event Action OnPutHand;
     public event Action OnPullOutHand;
 
@@ -19,19 +19,27 @@ public class Player : MonoBehaviour
     {
         _initPos = transform.position;
         _initRot = transform.eulerAngles;
+
+        OnPutHand += () =>
+        {
+            transform.DOMove(_putHandDistTP.transform.position, _putHandDuration);
+            transform.DORotate(_putHandDistTP.transform.rotation.eulerAngles, _putHandDuration);
+        };
+
+        OnPullOutHand += () =>
+        {
+            transform.DOMove(_initPos, _putHandDuration);
+            transform.DORotate(_initRot, _putHandDuration);
+        };
     }
-    
+
     public void PutHand()
     {
-        transform.DOMove(_putHandDistTP.transform.position, _putHandDuration);
-        transform.DORotate(_putHandDistTP.transform.rotation.eulerAngles, _putHandDuration);
         OnPutHand?.Invoke();
     }
 
     public void PullOutHand()
     {
-        transform.DOMove(_initPos, _putHandDuration);
-        transform.DORotate(_initRot, _putHandDuration);
         OnPullOutHand?.Invoke();
     }
 }
