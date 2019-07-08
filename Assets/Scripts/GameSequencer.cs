@@ -6,6 +6,7 @@ public class GameSequencer : MonoBehaviour
 {
     [SerializeField] private Player _thief;
     [SerializeField] private UICollentMoney _uiCollentMoney;
+    [SerializeField] private UITitle _uiTitle;
 
     private int _money = 100;
     private int _totalMoney = 0;
@@ -15,6 +16,13 @@ public class GameSequencer : MonoBehaviour
         _totalMoney = 0;
      
         _thief.Initialize();
+        _thief.OnPutHand += () =>
+        {
+            if (_uiTitle.IsShowing)
+            {
+                _uiTitle.Show(false);
+            }
+        };
         _thief.OnPullOutHand += () =>
         {
             _uiCollentMoney.ApplyAcquireMoney(_money);
@@ -24,7 +32,7 @@ public class GameSequencer : MonoBehaviour
     }
 
     void Update()
-    {
+    {        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _thief.PutHand();
@@ -33,5 +41,14 @@ public class GameSequencer : MonoBehaviour
         {
             _thief.PullOutHand();
         }
+        else if(Input.GetKeyDown(KeyCode.A))
+        {
+            BackTitle();
+        }
+    }
+
+    private void BackTitle()
+    {
+        _uiTitle.Show(true);
     }
 }
