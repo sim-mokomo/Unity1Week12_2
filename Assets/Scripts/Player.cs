@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
 
     public event Action OnPutHand;
     public event Action OnPullOutHand;
-    
 
     public void Initialize()
     {

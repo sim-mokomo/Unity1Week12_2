@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,18 +13,24 @@ public class GameSequencer : MonoBehaviour
 
     private int _money = 100;
     private int _totalMoney = 0;
+
+    public event Action OnStartGame;
+    public event Action OnAcquireMoney;
     
     void Start()
     {
         _totalMoney = 0;
+        _uiCollentMoney.gameObject.SetActive(false);
      
         _thief.Initialize();
         _thief.OnPutHand += () =>
         {
             if (_uiTitle.IsShowing)
             {
+                _uiCollentMoney.gameObject.SetActive(true);
                 _uiTitle.Show(false);
                 _sleepHuman.StartSleepSequence();
+                OnStartGame?.Invoke();
             }
         };
         _thief.OnPullOutHand += () =>
@@ -31,6 +38,7 @@ public class GameSequencer : MonoBehaviour
             _uiCollentMoney.ApplyAcquireMoney(_money);
             _uiCollentMoney.ApplyTotalMoney(_totalMoney + _money);
             _money += _money;
+            OnAcquireMoney?.Invoke();
         };
         
         _sleepHuman.Initialize();
@@ -63,6 +71,6 @@ public class GameSequencer : MonoBehaviour
     private void BackTitle()
     {
         _uiTitle.Show(true);
-        SceneManager.LoadScene(0);
+//        SceneManager.LoadScene(0);
     }
 }
