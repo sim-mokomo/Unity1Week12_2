@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSequencer : MonoBehaviour
 {
     [SerializeField] private Player _thief;
+    [SerializeField] private SleepHuman _sleepHuman;
     [SerializeField] private UICollentMoney _uiCollentMoney;
     [SerializeField] private UITitle _uiTitle;
 
@@ -21,6 +22,7 @@ public class GameSequencer : MonoBehaviour
             if (_uiTitle.IsShowing)
             {
                 _uiTitle.Show(false);
+                _sleepHuman.StartSleepSequence();
             }
         };
         _thief.OnPullOutHand += () =>
@@ -29,6 +31,8 @@ public class GameSequencer : MonoBehaviour
             _uiCollentMoney.ApplyTotalMoney(_totalMoney + _money);
             _money += _money;
         };
+        
+        _sleepHuman.Initialize();
     }
 
     void Update()
@@ -43,6 +47,7 @@ public class GameSequencer : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.A))
         {
+            _sleepHuman.StopSleepSequence();
             BackTitle();
         }
     }
