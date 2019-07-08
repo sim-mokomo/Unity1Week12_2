@@ -8,6 +8,8 @@ public class GameSound : MonoBehaviour
     [SerializeField] private AudioClip _bgm;
     [SerializeField] private AudioSource _seSource;
     [SerializeField] private AudioClip _acquireMoney;
+    [SerializeField] private AudioClip _shotSE;
+    
     private GameSequencer _gameSequencer;
 
     private void Start()
@@ -17,5 +19,6 @@ public class GameSound : MonoBehaviour
         _bgmSource.Play();
         _gameSequencer = GetComponent<GameSequencer>();
         _gameSequencer.OnAcquireMoney += () => { _seSource.PlayOneShot(_acquireMoney); };
+        _gameSequencer.OnEndGame += () => { _seSource.PlayOneShot(_shotSE); };
     }
 }
