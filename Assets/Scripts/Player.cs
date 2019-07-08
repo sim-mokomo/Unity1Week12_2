@@ -11,9 +11,11 @@ public class Player : MonoBehaviour
 
     private Vector3 _initPos;
     private Vector3 _initRot;
+    public bool IsStealing { get; private set; }
 
     public event Action OnPutHand;
     public event Action OnPullOutHand;
+    
 
     public void Initialize()
     {
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 
         OnPutHand += () =>
         {
+            IsStealing = true;
             transform.DOMove(_putHandDistTP.transform.position, _putHandDuration);
             transform.DORotate(_putHandDistTP.transform.rotation.eulerAngles, _putHandDuration);
         };
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour
         OnPullOutHand += () =>
         {
             transform.DOMove(_initPos, _putHandDuration);
-            transform.DORotate(_initRot, _putHandDuration);
+            transform.DORotate(_initRot, _putHandDuration).onComplete = () => { IsStealing = false;};
         };
     }
 

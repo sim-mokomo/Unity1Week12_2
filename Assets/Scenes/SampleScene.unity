@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156415850}
   - component: {fileID: 156415849}
+  - component: {fileID: 156415851}
   m_Layer: 0
   m_Name: SleepHuman
   m_TagString: Untagged
@@ -230,6 +231,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30.653002}
+--- !u!114 &156415851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156415848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae4d0911193c43c8acbea6711eaa6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sleepTimeMin: 0.5
+  _sleepTimeMax: 2
+  _baseColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
+  _sleepColor: {r: 0.20784315, g: 0.20392159, b: 0.20392159, a: 1}
+  _findStealColor: {r: 0.9339623, g: 0.22467959, b: 0.22467959, a: 1}
 --- !u!1 &298139767
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +437,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _thief: {fileID: 809438568}
+  _sleepHuman: {fileID: 156415851}
   _uiCollentMoney: {fileID: 796176015}
+  _uiTitle: {fileID: 871700356}
 --- !u!4 &479655987
 Transform:
   m_ObjectHideFlags: 0
@@ -744,6 +764,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52cfa0a3b161403f986667059e09439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _title: {fileID: 298139769}
+  _start: {fileID: 1650130313}
+  _fadeOutDuration: 4
+  _fadeInDuration: 2
 --- !u!1 &1044105176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,12 +1063,12 @@ PrefabInstance:
     - target: {fileID: 2783621426344941159, guid: 2b2ba491cd28141138a2b16940e51f42,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4
+      value: -12.7
       objectReference: {fileID: 0}
     - target: {fileID: 2783621426344941159, guid: 2b2ba491cd28141138a2b16940e51f42,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -16.4
+      value: -38.1
       objectReference: {fileID: 0}
     - target: {fileID: 2783621426344941159, guid: 2b2ba491cd28141138a2b16940e51f42,
         type: 3}

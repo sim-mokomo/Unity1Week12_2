@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSequencer : MonoBehaviour
 {
@@ -50,10 +51,18 @@ public class GameSequencer : MonoBehaviour
             _sleepHuman.StopSleepSequence();
             BackTitle();
         }
+
+        if (_thief.IsStealing && !_sleepHuman.IsSleeping)
+        {
+            _sleepHuman.FindSteal();
+            _sleepHuman.StopSleepSequence();
+            BackTitle();
+        }
     }
 
     private void BackTitle()
     {
         _uiTitle.Show(true);
+        SceneManager.LoadScene(0);
     }
 }
