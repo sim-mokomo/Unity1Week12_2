@@ -628,8 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11f5d19bf0a44a6fb7e6b9fc242f4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _putHandDistTP: {fileID: 0}
-  _putHandDuration: 0
+  _putHandDistTP: {fileID: 2212811}
+  _putHandDuration: 0.2
 --- !u!1 &871700351
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +642,7 @@ GameObject:
   - component: {fileID: 871700354}
   - component: {fileID: 871700353}
   - component: {fileID: 871700352}
+  - component: {fileID: 871700356}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -731,6 +732,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &871700356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871700351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52cfa0a3b161403f986667059e09439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044105176
 GameObject:
   m_ObjectHideFlags: 0
