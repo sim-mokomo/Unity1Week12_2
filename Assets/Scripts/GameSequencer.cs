@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 public class GameSequencer : MonoBehaviour
 {
@@ -42,11 +43,15 @@ public class GameSequencer : MonoBehaviour
                 OnStartGame?.Invoke();
             }
         };
+
+        _thief.OnFinding += () => { _money += UnityEngine.Random.Range(100,200); };
+        
         _thief.OnPullOutHand += () =>
         {
             _uiCollentMoney.ApplyAcquireMoney(_money);
             _uiCollentMoney.ApplyTotalMoney(_totalMoney + _money);
-            _money += _money;
+            _totalMoney += _money;
+            _money = 0;
             OnAcquireMoney?.Invoke();
         };
         
@@ -69,6 +74,10 @@ public class GameSequencer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _thief.PutHand();
+        }
+        else if(Input.GetKey(KeyCode.Space))
+        {
+            _thief.Finding();
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {

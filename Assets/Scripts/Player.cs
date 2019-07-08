@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     public event Action OnPutHand;
     public event Action OnPullOutHand;
+    public event Action OnFinding;
 
     public void Initialize()
     {
@@ -38,6 +39,11 @@ public class Player : MonoBehaviour
     public void PutHand()
     {
         OnPutHand?.Invoke();
+    }
+
+    public void Finding()
+    {
+        OnFinding?.Invoke();
     }
 
     public void PullOutHand()

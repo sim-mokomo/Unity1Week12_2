@@ -443,7 +443,9 @@ MonoBehaviour:
   _sleepHuman: {fileID: 156415851}
   _uiCollentMoney: {fileID: 796176015}
   _uiTitle: {fileID: 871700356}
-  _endWaitTime: 0
+  _forground: {fileID: 1317793635}
+  _endWaitTime: 2
+  _fadeInForground: 1.2
 --- !u!4 &479655987
 Transform:
   m_ObjectHideFlags: 0
@@ -1547,7 +1549,7 @@ PrefabInstance:
     - target: {fileID: 2783621426344941159, guid: 2b2ba491cd28141138a2b16940e51f42,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2783621426344941159, guid: 2b2ba491cd28141138a2b16940e51f42,
         type: 3}
