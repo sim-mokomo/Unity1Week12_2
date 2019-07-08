@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using naichilab;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = System.Random;
@@ -13,7 +14,6 @@ public class GameSequencer : MonoBehaviour
     [SerializeField] private UICollentMoney _uiCollentMoney;
     [SerializeField] private UITitle _uiTitle;
     [SerializeField] private SpriteRenderer _forground;
-    [SerializeField] private float _endWaitTime;
     [SerializeField] private float _fadeInForground;
 
     private int _money = 100;
@@ -31,6 +31,11 @@ public class GameSequencer : MonoBehaviour
         IsEndInitialize = false;
         _totalMoney = 0;
         _uiCollentMoney.gameObject.SetActive(false);
+        
+        OnEndGame += () =>
+        {
+            naichilab.RankingLoader.Instance.SendScoreAndShowRanking (_totalMoney);
+        };
      
         _thief.Initialize();
         _thief.OnPutHand += () =>
@@ -69,8 +74,12 @@ public class GameSequencer : MonoBehaviour
         if (!IsEndInitialize)
             return;
         if (IsGameEnd)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+                SceneManager.LoadScene(0);
             return;
-        
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _thief.PutHand();
@@ -107,7 +116,6 @@ public class GameSequencer : MonoBehaviour
             _fadeInForground).onComplete = () =>
         {
             OnEndGame?.Invoke();
-            StartCoroutine(Wait(_endWaitTime, () => { SceneManager.LoadScene(0); }));
         };
     }
 
