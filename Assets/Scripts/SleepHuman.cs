@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SleepHuman : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class SleepHuman : MonoBehaviour
     private SpriteRenderer _renderer;
     
     public bool IsSleeping { get; private set; }
+    public event Action OnWokeUp;
+    public event Action OnSleep; 
 
     public SpriteRenderer Renderer
     {
@@ -52,10 +56,12 @@ public class SleepHuman : MonoBehaviour
         while (true)
         {
             yield return GetSleepTime();
+            OnWokeUp?.Invoke();
             IsSleeping = false;
             Renderer.color = _baseColor;
             transform.rotation = Quaternion.identity;
             yield return new WaitForSeconds(0.5f);
+            OnSleep?.Invoke();
             IsSleeping = true;
             Renderer.color = _sleepColor;
             transform.rotation = Quaternion.Euler(_sleepRot);

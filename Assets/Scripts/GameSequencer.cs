@@ -15,6 +15,7 @@ public class GameSequencer : MonoBehaviour
     [SerializeField] private UITitle _uiTitle;
     [SerializeField] private SpriteRenderer _forground;
     [SerializeField] private float _fadeInForground;
+    [SerializeField] private GameObject _tweetCanvas;
 
     private int _money = 100;
     private int _totalMoney = 0;
@@ -30,7 +31,8 @@ public class GameSequencer : MonoBehaviour
         IsGameEnd = false;
         IsEndInitialize = false;
         _totalMoney = 0;
-        _uiCollentMoney.gameObject.SetActive(false);
+        _tweetCanvas.gameObject.SetActive(false);
+        _uiCollentMoney.Show(false);
         
         OnEndGame += () =>
         {
@@ -42,7 +44,7 @@ public class GameSequencer : MonoBehaviour
         {
             if (_uiTitle.IsShowing)
             {
-                _uiCollentMoney.gameObject.SetActive(true);
+                _uiCollentMoney.Show(true);
                 _uiTitle.Show(false);
                 _sleepHuman.StartSleepSequence();
                 OnStartGame?.Invoke();
@@ -75,10 +77,11 @@ public class GameSequencer : MonoBehaviour
             return;
         if (IsGameEnd)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space))
                 SceneManager.LoadScene(0);
             return;
         }
+        
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -91,11 +94,6 @@ public class GameSequencer : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Space))
         {
             _thief.PullOutHand();
-        }
-        else if(Input.GetKeyDown(KeyCode.A))
-        {
-            _sleepHuman.StopSleepSequence();
-            BackTitle();
         }
 
         if (_thief.IsStealing && !_sleepHuman.IsSleeping)
@@ -115,6 +113,8 @@ public class GameSequencer : MonoBehaviour
             1f,
             _fadeInForground).onComplete = () =>
         {
+            _tweetCanvas.gameObject.SetActive(true);
+            _thief.Kill();
             OnEndGame?.Invoke();
         };
     }
@@ -123,5 +123,11 @@ public class GameSequencer : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         action?.Invoke();
+    }
+
+    public void OnClickTweet()
+    {
+        naichilab.UnityRoomTweet.Tweet("thief",$"{_totalMoney}円盗んだ。ただし死んだ。@sim_mokomo",new string[]{"unityroom","unity1week"});
+        SceneManager.LoadScene(0);
     }
 }

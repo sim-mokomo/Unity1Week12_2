@@ -18,16 +18,8 @@ public class PlayerSound : MonoBehaviour
         _findingMoneySource.clip = _findingMoney;
         
         _player = FindObjectOfType<Player>();
-        _player.OnPutHand += () =>
-        {
-            _bressSource.Play();
-            _findingMoneySource.Play();
-        };
-
-        _player.OnPullOutHand += () =>
-        {
-            _bressSource.Stop();
-            _findingMoneySource.Stop();
-        };
+        _player.OnPutHand += () => { _findingMoneySource.Play(); };
+        _player.OnPullOutHand += () => { _findingMoneySource.Stop(); };
+        _player.OnKill += () => { _bressSource.Stop(); };
     }
 }
